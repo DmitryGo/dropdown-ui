@@ -27,7 +27,7 @@ module.exports = {
 			}
 		}),
 		new MiniCssExtractPlugin({
-			filename: 'bundle-[hash].css'
+			filename: 'css/bundle-[hash].css',
 		}),
 	],
 	module: {
@@ -70,23 +70,27 @@ module.exports = {
 				],
 			},
 			{
-				test: /\.(sa|sc|c)ss$/,
+				test: /\.module\.css$/,
+				exclude: /node_modules/,
 				use: [
+					'style-loader',
 					{
-						loader: MiniCssExtractPlugin.loader,
+						loader: 'css-loader',
 						options: {
-							hmr: true,
+							importLoaders: 1,
+							modules: {
+								mode: 'local',
+								exportLocalsConvention: 'dashesOnly',
+								localIdentName: '[name]__[local]__[hash:base64:5]',
+							},
 						},
 					},
-					'css-loader',
-					'postcss-loader',
-					'sass-loader',
 				],
 			},
 		],
 	},
 	devServer: {
 		contentBase: path.join(__dirname, 'dist'),
-		port: 3000,
+		port: 3001,
 	},
 };
