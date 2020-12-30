@@ -1,0 +1,28 @@
+{
+	"compilerOptions": {
+		"module": "es2020",
+		"moduleResolution": "node",
+		"target": "es2017",
+		"lib": ["ES2017", "DOM", "DOM.Iterable"],
+		"jsx": "react",
+		"outDir": "./dist",
+		"incremental": true,
+		"sourceMap": true,
+		"allowJs": true,
+		"strict": true,
+		"resolveJsonModule": true,
+		"preserveConstEnums": true,
+		"noErrorTruncation": true,
+		"experimentalDecorators": true,
+		"allowSyntheticDefaultImports": true,
+		"isolatedModules": true,
+		"esModuleInterop": true,
+		"noFallthroughCasesInSwitch": true,
+		"noEmitOnError": true,
+		"allowUnreachableCode": false,
+		"forceConsistentCasingInFileNames": true,
+		"importHelpers": true
+	},
+	"include": ["./src/*.tsx", "./src/**/*.ts", "./src/**/*.tsx"],
+	"exclude": ["./cache", "./node_modules"]
+}
