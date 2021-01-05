@@ -1,26 +1,25 @@
 .root {
-	display: flex;
-	width: 100%;
-	border: 1px solid #b2bed0;
-	border-radius: 4px;
-	max-width: 100%;
-	min-height: 36px;
 	position: relative;
-	background-color: #fff;
 }
 
 .select {
 	cursor: pointer;
 	display: flex;
 	width: 100%;
+	min-width: 180px;
 	padding: 0 32px 0 8px;
-	min-width: 0;
 	position: relative;
 	flex-wrap: nowrap;
 	align-items: center;
 	color: #0a1b2a;
 	font-size: 14px;
 	line-height: 18px;
+	background-color: #fff;
+	border: 1px solid #b2bed0;
+	border-radius: 4px;
+	max-width: 100%;
+	min-height: 36px;
+	box-sizing: border-box;
 }
 
 .value {
@@ -36,6 +35,7 @@
 	margin-top: 8px;
 	z-index: 1;
 	width: 240px;
+	max-width: 100%;
 	background-color: #fff;
 	border: 1px solid #b2bed0;
 	box-shadow: 0 4px 24px rgba(0, 0, 0, .08);
@@ -49,6 +49,11 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+.input {
+	width: 100%;
+	padding: 8px;
 }
 
 .menu {

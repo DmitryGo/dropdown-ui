@@ -11,17 +11,6 @@ export default React.memo(function App() {
 			<Dropdown
 				onChange={handleChange}
 				options={[]}
-				isSearch
-				header={(
-					<span>
-						Header
-					</span>
-				)}
-				bottom={(
-					<span>
-						Footer
-					</span>
-				)}
 			/>
 		</div>
 	);

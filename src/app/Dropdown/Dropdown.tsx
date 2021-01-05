@@ -9,8 +9,9 @@ import {useDropdown} from './hooks/useDropdown';
 
 const SHOW_SEARCH_COUNT = 6;
 
-type TElement = React.ReactElement<{
-	close?: Function;
+type TElement<T> = React.ReactElement<{
+	onClose?: Function;
+	options: ReadonlyArray<T>,
 }>;
 
 type TOption = {
@@ -27,8 +28,9 @@ interface IProps<T extends TOption> {
 	options: ReadonlyArray<T>;
 	isSearch?: boolean;
 	multiple?: boolean;
-	header?: TElement;
-	bottom?: TElement;
+	header?: TElement<T>;
+	footer?: TElement<T>;
+	trigger?: TElement<T>;
 }
 
 function Dropdown<T extends TOption>({
@@ -37,8 +39,9 @@ function Dropdown<T extends TOption>({
 	options,
 	placeholder = 'Select',
 	disabled,
+	trigger,
 	header,
-	bottom,
+	footer,
 	isSearch,
 }: IProps<T>) {
 	const {dropdownRef, isOpen, open, close} = useDropdown();
@@ -62,14 +65,19 @@ function Dropdown<T extends TOption>({
 
 	return (
 		<div ref={dropdownRef} className={cn(css.root, className)} onClick={handleOpen}>
-			<div className={css.select}>
-				<span className={css.value}>{placeholder}</span>
-			</div>
+			{trigger
+				? React.cloneElement(trigger, {onClose: close, options: searchOptions})
+				: (
+					<div className={css.select}>
+						<span className={css.value}>{placeholder}</span>
+					</div>
+				)
+			}
 			{isOpen && (
 				<div className={cn(css.overlay, classNameOverlay)}>
 					{isSearch || options.length > SHOW_SEARCH_COUNT ? (
 						<div className={css.search}>
-							<input value={search} onChange={handleSearch} />
+							<input className={css.input} value={search} onChange={handleSearch} />
 						</div>
 					) : null}
 					<div className={css.menu}>
@@ -78,7 +86,7 @@ function Dropdown<T extends TOption>({
 							<button className={css.option}>Element</button>
 						</div>
 					</div>
-					{bottom}
+					{footer}
 				</div>
 			)}
 		</div>
