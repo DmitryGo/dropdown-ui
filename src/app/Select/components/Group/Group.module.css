@@ -1,4 +1,4 @@
-.option {
+.label {
 	position: relative;
 	padding: 8px 12px;
 	background: none;
@@ -13,6 +13,10 @@
 }
 
 .selected,
-.option:hover {
+.label:hover {
 	background-color: #E6F9F9;
+}
+
+.option {
+	padding: 8px 24px !important;
 }

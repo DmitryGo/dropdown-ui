@@ -1,20 +1,23 @@
 import cn from 'classnames';
 import React from 'react';
-import css from '../Option/Option.module.css';
+import {TOption} from '../../types';
+
+import css from './Group.module.css';
 
 interface IProps {
 	label: string | React.ReactNode;
+	data: TOption;
 	children: React.ReactNode;
 }
 
-export default React.memo<IProps>(function Group({label, children}) {
+export default React.memo<IProps>(function Group({label, children, data}) {
 	return (
 		<>
-			<button className={cn(css.label)}>{label}</button>
+			<button className={cn(css.label)} value={data.value}>{label}</button>
 			{React.Children.map(children, child => React.isValidElement(child)
 				? (
 					React.cloneElement(child, {
-						className: css.option
+						className: css.option,
 					})
 				)
 				: child

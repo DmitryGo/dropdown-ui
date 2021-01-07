@@ -7,5 +7,5 @@ export type TOption<T = unknown> = {
 	text: string | ReactElement;
 	disabled?: boolean;
 	options?: ReadonlyArray<TOption<T>>;
-	data: T; // для рендера кастомных данных
+	data?: T; // для рендера кастомных данных
 }

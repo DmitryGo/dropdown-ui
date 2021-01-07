@@ -2,7 +2,10 @@ import React, {
 	useCallback,
 	useState,
 } from 'react';
-import {Select, Option} from '../Select';
+import {
+	Select,
+	Option,
+} from '../Select';
 import {TValue} from '../Dropdown/types';
 
 import css from './App.module.css';
@@ -11,23 +14,27 @@ const OPTIONS = [
 	{
 		value: 'all',
 		text: 'All',
-		description: 'Contain all values',
 	},
 	{
 		value: 'all_text',
 		text: 'All Text',
-		description: 'Contain all text',
-		children: ['text'],
-	},
-	{
-		value: 'text',
-		text: 'Text',
-		isChild: true,
+		data: {
+			description: 'Contain all text',
+		},
+		options: [
+			{
+				value: 'text',
+				text: 'Text',
+			},
+			{
+				value: 'text2',
+				text: 'Text 2',
+			},
+		],
 	},
 	{
 		value: 'big',
 		text: 'Vey big name Vey big name Vey big name',
-		description: 'Very big description Very big description Very big description',
 	},
 ] as const;
 
@@ -45,8 +52,9 @@ export default React.memo(function App() {
 				value={value}
 				onChange={handleChange}
 			>
-				<Option />
-				<Option />
+				{OPTIONS.map((option, key) => (
+					<Option key={key} value={option.value} data={option} />
+				))}
 			</Select>
 		</div>
 	);
