@@ -35,6 +35,16 @@ const OPTIONS = [
 	{
 		value: 'big',
 		text: 'Vey big name Vey big name Vey big name',
+		options: [
+			{
+				value: 'text3',
+				text: 'Text 3',
+			},
+			{
+				value: 'text4',
+				text: 'Text 4',
+			},
+		],
 	},
 ] as const;
 
