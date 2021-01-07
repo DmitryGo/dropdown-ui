@@ -2,7 +2,7 @@ import React, {
 	useCallback,
 	useState,
 } from 'react';
-import {Dropdown} from '../Dropdown';
+import {Select, Option} from '../Select';
 import {TValue} from '../Dropdown/types';
 
 import css from './App.module.css';
@@ -41,13 +41,13 @@ export default React.memo(function App() {
 
 	return (
 		<div className={css.root}>
-			<Dropdown
-				onChange={handleChange}
+			<Select
 				value={value}
-				defaultValue={DEFAULT_VALUE}
-				options={OPTIONS}
-				multiple
-			/>
+				onChange={handleChange}
+			>
+				<Option />
+				<Option />
+			</Select>
 		</div>
 	);
 });

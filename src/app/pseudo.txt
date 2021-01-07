@@ -1,0 +1,49 @@
+Псевдокод селекта
+<Select
+    value
+    disabled?
+    loading?
+    multiple?: union (с числом) | tags (отедльные плашки, пока без крестиков)
+    className?
+    placeholder?
+    position?
+    showSearch? // рисуем если больше 10
+    onChange // (при анфокусе если multiple)
+    popupRender=((options) => <div><Search />{options}<Link /></div>)
+    valueRender={(value: string | number, data?: TOption<T?>) => string | <Component />} // Простой компонент
+    onSearch?
+>
+    <Option value disabled?>Text</Option>
+    <Option value>
+        <CustomComponent />
+    </Option>
+    <Group label={string | <CustomLabel />} selectable? >
+        <Option value />
+        <Option value />
+    </Option>
+</Select>
+
+type TOption<T = unknown> = {
+    value: string | number;
+    text: string | ReactComponent;
+    disabled?: boolean;
+    options?: ReadonlyArray<TOption<T>>;
+    data: T; // для рендера кастомных данных
+}
+
+<Select
+    value
+    onChange
+>
+    {options.map(option => (
+        <Option data?={option} value={option.value} >
+            {option.text}
+        </Option>
+    )}
+</Select>
+
+В самом option проверять если ли option.options иначе children в группу
+
+Поиск - Если single - то поиск в самом input
+иначе если multiple и включен флаг поиска, то показываем инпут поиска внутри
+
