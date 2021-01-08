@@ -6,7 +6,7 @@ import {
 	Select,
 	Option,
 } from '../Select';
-import {TValue} from '../Dropdown/types';
+import {TValue} from '../Select/types';
 
 import css from './App.module.css';
 
@@ -51,7 +51,7 @@ const OPTIONS = [
 const DEFAULT_VALUE = 'all';
 
 export default React.memo(function App() {
-	const [value, setValue] = useState<TValue>([DEFAULT_VALUE]);
+	const [value, setValue] = useState<TValue>(DEFAULT_VALUE);
 	const handleChange = useCallback((newValue: TValue) => {
 		setValue(newValue);
 	}, []);

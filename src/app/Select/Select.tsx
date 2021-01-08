@@ -5,7 +5,6 @@ import cn from 'classnames';
 
 import {useSelect} from './hooks/useSelect';
 import {
-	TOption,
 	TValue,
 } from './types';
 
@@ -13,69 +12,42 @@ import css from './Select.module.css';
 
 interface IProps {
 	children: React.ReactNode;
-	value: TValue;
-	disabled?: boolean;
-	loading?: boolean;
-	multiple?: 'union' | 'tags';
+	value?: TValue;
 	className?: string;
-	classNameOverlay?: string;
 	placeholder?: string;
-	position?: string;
-	showSearch?: boolean;
 	onChange: (arg: TValue) => void;
-	valueRender?: (arg: TValue, data?: TOption) => React.ReactNode;
-	popupRender?: (option: React.ReactNode) => React.ReactNode;
 }
 
 function Select({
 	value,
 	className,
-	classNameOverlay,
+	onChange,
 	placeholder = 'Select',
-	disabled,
 	children,
-	showSearch,
-	multiple,
-	valueRender,
-	popupRender,
 }: IProps) {
 	const {selectRef, isOpen, open, close} = useSelect();
-	const handleOpen = useCallback(() => {
-		if (!disabled) {
-			open();
-		}
-	}, [disabled, open]);
+
+	const handleClickOption = useCallback((arg: TValue) => {
+		onChange(arg);
+		close();
+	}, [onChange, close]);
 
 	return (
-		<div ref={selectRef} className={cn(css.root, className)} onClick={handleOpen} >
-			<div className={cn(css.select, disabled && css.disabled)}>
-				{value && valueRender ? valueRender(value) : null}
-				{!Array.isArray(value) && !valueRender ? <span className={css.value}>{value}</span> : null}
-				{Array.isArray(value) && !valueRender ? <span className={css.value}>Selected: {value.length}</span> : null}
-				{!value && placeholder ? <span className={css.value}>{placeholder}</span> : null}
-				{showSearch ? (
-					<span className={cn(css.search, isOpen && css.searchActive)}>
-						<input
-							className={css.input}
-							autoComplete="off"
-							value=""
-						/>
-					</span>
-				) : null}
+		<div ref={selectRef} className={cn(css.root, className)} onClick={open} >
+			<div className={css.select}>
+				<span className={css.value}>{placeholder}</span>
 			</div>
 			{isOpen && (
-				<div className={cn(css.overlay, classNameOverlay)}>
-					{popupRender
-						? popupRender(children)
-						: React.Children.map(children, child => React.isValidElement(child)
-							? (
-								React.cloneElement(child, {
-								// TODO: Пробрасывать нужные свойства
-								})
-							)
-							: child
+				<div className={css.overlay}>
+					{React.Children.map(children, child => React.isValidElement(child)
+						? (
+							React.cloneElement(child, {
+								onChange: handleClickOption,
+								activeValue: value,
+							})
 						)
-					}
+						: child
+					)}
 				</div>
 			)}
 		</div>

@@ -1,0 +1,25 @@
+.option {
+	position: relative;
+	padding: 8px 12px;
+	background: none;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	display: flex;
+	border-top: 1px solid #ECEFF3;
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
+	text-align: left;
+}
+
+.selected,
+.option:hover {
+	background-color: #E6F9F9;
+}
+
+.text {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
