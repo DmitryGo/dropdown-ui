@@ -7,10 +7,14 @@ import {
 
 export const useSelect = () => {
 	const [isOpen, setIsOpen] = useState(false);
+	const [search, setSearch] = useState('');
 	const selectRef = useRef<HTMLDivElement>(null);
 
 	const open = useCallback(() => setIsOpen(true), []);
-	const close = useCallback(() => setIsOpen(false), []);
+	const close = useCallback(() => {
+		setIsOpen(false);
+		setSearch('');
+	}, []);
 
 	const handler = useCallback(
 		(event: Event) => {
@@ -21,7 +25,7 @@ export const useSelect = () => {
 			)
 				close();
 		},
-		[selectRef, close],
+		[close],
 	);
 
 	useEffect(() => {
@@ -34,5 +38,5 @@ export const useSelect = () => {
 		};
 	}, [handler]);
 
-	return {selectRef, isOpen, open, close};
+	return {selectRef, isOpen, open, close, search, setSearch};
 };

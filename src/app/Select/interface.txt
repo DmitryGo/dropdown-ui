@@ -1,0 +1,55 @@
+<Select
+    value
+    name?
+    multiple?: 'tags' | 'union';
+    disabled?
+    className?
+    loading?
+    placeholder?
+    valueRender?: (value: TSelectValue, data?: ???) => ReactNode;
+    popupRender?: (popup: ReactNode) => (
+        <div>
+            {popup}
+            <Link />
+        </div>
+    );
+    onChange: (value: TSelectValue) => void;
+>
+    <Option value>
+        Text
+    </Option>
+    <Option>
+        <CustomComponent {...} />
+    </Option>
+    <Option/>
+</Select>
+
+
+
+
+<Select
+    value: TSelectValue
+    valueRender: (value: number, data?: ???) => (
+        <span>
+            <Icon name={data.iconName} />
+            {value}
+        </span>
+    );
+    onChange: (value: TSelectValue) => void;
+>
+    {options.map((option: TOption) => (
+        <Option value={option.value} data={option}>
+            {option.text}
+        </Option>
+    ))}
+</Select>
+
+type TSelectValue = string | number;
+
+type TOption<T = unknown> {
+    value: TSelectValue;
+    text: string | ReactNode;
+    disabled?: boolean;
+    options?: TOption[];
+    data?: T;
+}

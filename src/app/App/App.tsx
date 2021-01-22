@@ -61,6 +61,7 @@ export default React.memo(function App() {
 			<Select
 				value={value}
 				onChange={handleChange}
+				options={OPTIONS}
 			>
 				{OPTIONS.map((option, key) => (
 					<Option key={key} value={option.value} data={option} />
